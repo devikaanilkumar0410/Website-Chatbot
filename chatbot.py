@@ -30,12 +30,23 @@
 
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-import google.generativeai as genai
 
-# Gemini API Key
-genai.configure(api_key="AIzaSyC3VNJpGumyujVj9CzyfILoj9ammbeD8ow")
+
+
+
+
+from dotenv import load_dotenv
+import google.generativeai as genai
+import os
+
+load_dotenv()
+
+GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GOOGLE_API_KEY)
 
 model = genai.GenerativeModel("gemini-2.5-flash")
+
+
 
 embeddings = HuggingFaceEmbeddings(
     model_name="all-MiniLM-L6-v2"
